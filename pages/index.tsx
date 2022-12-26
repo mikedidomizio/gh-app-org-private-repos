@@ -13,6 +13,7 @@ type Context = {
 
 type Props = {
   accessToken?: string
+  appName: string
   clientId: string
   redirectUrl: string
 }
@@ -28,12 +29,18 @@ export async function getServerSideProps(
 ) {
   const code = context.query['code']
 
-  const clientId = process.env.GITHUB_ID
-  const redirectUrl = process.env.GITHUB_REDIRECT_URL
+  const githubAppName = process.env.GITHUB_APP_NAME
+  const githubClientId = process.env.GITHUB_ID
+  const githubRedirectUrl = process.env.GITHUB_REDIRECT_URL
+
+  if (!githubAppName || !githubClientId || !githubRedirectUrl) {
+    throw new Error('Expected env vars not set')
+  }
 
   const baseObject = {
-    clientId,
-    redirectUrl,
+    appName: githubAppName,
+    clientId: githubClientId,
+    redirectUrl: githubRedirectUrl,
   }
 
   if (code) {
@@ -41,7 +48,7 @@ export async function getServerSideProps(
       client_id: process.env.GITHUB_ID,
       client_secret: process.env.GITHUB_SECRET,
       code,
-      redirect_url: redirectUrl,
+      redirect_url: githubRedirectUrl,
     }
 
     const response = await fetch(
@@ -72,7 +79,12 @@ export async function getServerSideProps(
   }
 }
 
-export default function Home({ accessToken, clientId, redirectUrl }: Props) {
+export default function Home({
+  accessToken,
+  appName,
+  clientId,
+  redirectUrl,
+}: Props) {
   const router = useRouter()
   const { installation_id } = router.query
 
@@ -135,7 +147,7 @@ export default function Home({ accessToken, clientId, redirectUrl }: Props) {
 
   const openGitHubInstallWindow = () => {
     const win = window.open(
-      'https://github.com/apps/gh-dash/installations/new',
+      `https://github.com/apps/${appName}/installations/new`,
       'popup',
       'toolbar=1,width=800,height=600',
     )
@@ -227,8 +239,11 @@ export default function Home({ accessToken, clientId, redirectUrl }: Props) {
         ) : null}
 
         <p className={styles.mb}>
-          {/** Todo proper url for the github project **/}
-          <a href="https://github.com" target="_blank" rel="noreferrer">
+          <a
+            href="https://github.com/mikedidomizio/github-app-organization-private-repos"
+            target="_blank"
+            rel="noreferrer"
+          >
             <Image
               className={styles.githubIcon}
               src="/github-mark-white.svg"
