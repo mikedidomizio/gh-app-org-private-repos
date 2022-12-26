@@ -1,0 +1,15 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6rem;
+  min-height: 100vh;
+}
+
+.mb {
+  margin-bottom: 32px;
+}
+
+.pointer {
+  cursor: pointer;
+}
