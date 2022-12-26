@@ -31,9 +31,15 @@ export async function getServerSideProps(
 
   const githubAppName = process.env.GITHUB_APP_NAME
   const githubClientId = process.env.GITHUB_ID
+  const githubClientSecret = process.env.GITHUB_SECRET
   const githubRedirectUrl = process.env.GITHUB_REDIRECT_URL
 
-  if (!githubAppName || !githubClientId || !githubRedirectUrl) {
+  if (
+    !githubAppName ||
+    !githubClientId ||
+    !githubClientSecret ||
+    !githubRedirectUrl
+  ) {
     throw new Error('Expected env vars not set')
   }
 
@@ -45,8 +51,8 @@ export async function getServerSideProps(
 
   if (code) {
     const requestData = {
-      client_id: process.env.GITHUB_ID,
-      client_secret: process.env.GITHUB_SECRET,
+      client_id: githubClientId,
+      client_secret: githubClientSecret,
       code,
       redirect_url: githubRedirectUrl,
     }
