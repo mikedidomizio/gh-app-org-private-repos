@@ -1,5 +1,7 @@
 # GitHub App Organization Private Repo
 
+[Demo/Example](https://github-app-organization-private-repos.vercel.app/)
+
 The purpose of this repository is to show a simple example of how to use a GitHub app to access an organization's private repositories.
 
 I found this was a bit tricky to understand and I'm hoping this makes it simpler for others in the future (including myself 😅). 
@@ -17,7 +19,7 @@ This quick start assumes you have a GitHub organization you are part of that has
 
 The following settings are expected:
 
-- `GitHub App name` is the app name that users will see when installing this application.  For demo purposes it's not really important and can be changed later.
+- `GitHub App name` is the app name that users will see when installing this application.
 - `Homepage URL` can be anything, for this demo we will use `http://localhost:3000`.
 - `Callback URL` will be `http://localhost:3000`.  This is for demo purposes and in a production environment would redirect to your production website.
 - `Setup URL (optional)` will be `http://localhost:3000`.  The purpose of this is for our demo we will redirect back after install, and close the window.  In a real environment you may not want this.
