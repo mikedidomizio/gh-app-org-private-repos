@@ -1,13 +1,13 @@
-# GitHub App Organization Private Repo
+# Simple NextJS example on how a GitHub app can access a GitHub organization's private repos
 
-[Demo/Example](https://github-app-organization-private-repos.vercel.app/)
+[Demo/Example](https://gh-app-org-private-repos.vercel.app/)
 
 The purpose of this repository is to show a simple example of how to use a GitHub app to access an organization's private repositories.
 
-I found this was a bit tricky to understand and I'm hoping this makes it simpler for others in the future (including myself 😅). 
+I found this was a bit tricky to understand and I'm hoping this makes it simpler for others in the future. 
 
 It is done using NextJS and follows a similar flow to how [Netlify](netlify.com) fetches organization repositories.  Whether you are using React or not, I hope this helps you
-to understand how to do this.
+to understand how to do this.  The [how it works](#how-it-works) section breaks it down more.
 
 This is a simple demonstration with React and although there are QOL improvements that could be done with this, it's made to be simple and one component.  
 
